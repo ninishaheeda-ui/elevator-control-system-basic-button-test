@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Smart Lift Control</title>
+</head>
+
+<body>
+
+<h1>Smart Lift Using NFC</h1>
+
+<h3>Select Floor</h3>
+
+<button onclick="selectFloor(1)">Floor 1</button>
+<button onclick="selectFloor(2)">Floor 2</button>
+<button onclick="selectFloor(3)">Floor 3</button>
+
+<br><br>
+
+<p id="status">Waiting...</p>
+
+<script>
+
+function selectFloor(floor){
+
+  document.getElementById("status").innerHTML =
+  "Selected Floor : " + floor;
+
+}
+
+</script>
+
+</body>
+</html>
