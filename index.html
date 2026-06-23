@@ -2,29 +2,177 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Smart Lift Control</title>
+
+<style>
+
+body{
+    background:#808080;
+    font-family:Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    margin:0;
+}
+
+.container{
+    background:white;
+    width:90%;
+    max-width:500px;
+    padding:30px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 0 20px rgba(0,0,0,0.2);
+}
+
+h1{
+    font-size:35px;
+    margin-bottom:20px;
+}
+
+h2{
+    font-size:28px;
+}
+
+button{
+    width:100%;
+    padding:20px;
+    margin:10px 0;
+    font-size:25px;
+    font-weight:bold;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+.floorBtn{
+    background:#d9d9d9;
+}
+
+#status{
+    margin-top:20px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.hidden{
+    display:none;
+}
+
+</style>
 </head>
 
 <body>
 
-<h1>Smart Lift Using NFC</h1>
+<div class="container">
 
-<h3>Select Floor</h3>
+<h1>SMART LIFT CONTROL</h1>
 
-<button onclick="selectFloor(1)">Floor 1</button>
-<button onclick="selectFloor(2)">Floor 2</button>
-<button onclick="selectFloor(3)">Floor 3</button>
+<div id="currentFloorSection">
 
-<br><br>
+<h2>Select Current Floor</h2>
 
-<p id="status">Waiting...</p>
+<button class="floorBtn" onclick="selectCurrentFloor(1)">
+FLOOR 1
+</button>
+
+<button class="floorBtn" onclick="selectCurrentFloor(2)">
+FLOOR 2
+</button>
+
+<button class="floorBtn" onclick="selectCurrentFloor(3)">
+FLOOR 3
+</button>
+
+</div>
+
+<div id="destinationSection" class="hidden">
+
+<h2>Select Destination Floor</h2>
+
+<button class="floorBtn" onclick="selectDestinationFloor(1)">
+FLOOR 1
+</button>
+
+<button class="floorBtn" onclick="selectDestinationFloor(2)">
+FLOOR 2
+</button>
+
+<button class="floorBtn" onclick="selectDestinationFloor(3)">
+FLOOR 3
+</button>
+
+</div>
+
+<p id="status">
+Waiting for selection...
+</p>
+
+</div>
 
 <script>
 
-function selectFloor(floor){
+let elevatorFloor = 1;
+let currentFloor = 0;
+let destinationFloor = 0;
 
-  document.getElementById("status").innerHTML =
-  "Selected Floor : " + floor;
+function selectCurrentFloor(floor){
+
+    currentFloor = floor;
+
+    if(currentFloor == elevatorFloor){
+
+        document.getElementById("status").innerHTML =
+        "🚪 LIFT IS HERE!!!<br>Please Select Destination Floor";
+
+    }else{
+
+        document.getElementById("status").innerHTML =
+        "Lift is moving to Floor " + currentFloor +
+        "<br>Please Select Destination Floor";
+
+    }
+
+    document.getElementById("destinationSection")
+    .classList.remove("hidden");
+}
+
+function selectDestinationFloor(floor){
+
+    destinationFloor = floor;
+
+    if(destinationFloor == currentFloor){
+
+        document.getElementById("status").innerHTML =
+        "📍 YOU ARE ALREADY HERE";
+
+        return;
+    }
+
+    if(destinationFloor > currentFloor){
+
+        document.getElementById("status").innerHTML =
+        "⬆ MOVING UP<br>Floor " +
+        currentFloor +
+        " → Floor " +
+        destinationFloor;
+
+    }else{
+
+        document.getElementById("status").innerHTML =
+        "⬇ MOVING DOWN<br>Floor " +
+        currentFloor +
+        " → Floor " +
+        destinationFloor;
+
+    }
 
 }
 
