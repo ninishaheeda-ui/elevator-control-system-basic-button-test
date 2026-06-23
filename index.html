@@ -9,13 +9,13 @@
 <style>
 
 body{
-    background:#808080;
+    margin:0;
     font-family:Arial, sans-serif;
+    background:#808080;
     display:flex;
     justify-content:center;
     align-items:center;
     height:100vh;
-    margin:0;
 }
 
 .container{
@@ -28,30 +28,30 @@ body{
 }
 
 h1{
-    font-size:36px;
+    font-size:40px;
 }
 
 h2{
-    font-size:28px;
+    font-size:30px;
 }
 
 button{
     width:100%;
     padding:20px;
-    margin:10px 0;
+    margin:12px 0;
+    font-size:28px;
     border:none;
     border-radius:15px;
-    font-size:24px;
-    cursor:pointer;
     background:#e5e5e5;
+    cursor:pointer;
 }
 
 button:hover{
-    background:#d0d0d0;
+    background:#d5d5d5;
 }
 
 #status{
-    font-size:26px;
+    font-size:28px;
     font-weight:bold;
     margin-top:20px;
 }
@@ -67,11 +67,11 @@ button:hover{
 
 <div class="container">
 
-<h1>SMART LIFT CONTROL</h1>
+<h1>SMART LIFT</h1>
 
-<!-- STEP 1 -->
+<!-- PAGE 1 -->
 
-<div id="currentSection">
+<div id="page1">
 
 <h2>Select Current Floor</h2>
 
@@ -81,9 +81,9 @@ button:hover{
 
 </div>
 
-<!-- STEP 2 -->
+<!-- PAGE 2 -->
 
-<div id="destinationSection" class="hidden">
+<div id="page2" class="hidden">
 
 <h2>Select Destination Floor</h2>
 
@@ -93,33 +93,27 @@ button:hover{
 
 </div>
 
-<p id="status">
-Waiting...
-</p>
+<p id="status"></p>
 
 </div>
 
 <script>
 
 let currentFloor = 0;
-let destinationFloor = 0;
 
 function selectCurrent(floor){
 
     currentFloor = floor;
 
-    document.getElementById("currentSection").classList.add("hidden");
+    document.getElementById("page1").style.display = "none";
 
-    document.getElementById("destinationSection").classList.remove("hidden");
+    document.getElementById("page2").classList.remove("hidden");
 
     document.getElementById("status").innerHTML =
-    "🚪 Lift Is Here!<br>Select Destination Floor";
-
+    "🚪 Lift Is Here!";
 }
 
-function selectDestination(floor){
-
-    destinationFloor = floor;
+function selectDestination(destinationFloor){
 
     if(destinationFloor == currentFloor){
 
@@ -132,21 +126,19 @@ function selectDestination(floor){
     if(destinationFloor > currentFloor){
 
         document.getElementById("status").innerHTML =
-        "⬆ MOVING UP<br>Floor " +
-        currentFloor +
+        "⬆ MOVING UP<br>Floor "
+        + currentFloor +
         " → Floor " +
         destinationFloor;
 
     }else{
 
         document.getElementById("status").innerHTML =
-        "⬇ MOVING DOWN<br>Floor " +
-        currentFloor +
+        "⬇ MOVING DOWN<br>Floor "
+        + currentFloor +
         " → Floor " +
         destinationFloor;
-
     }
-
 }
 
 </script>
